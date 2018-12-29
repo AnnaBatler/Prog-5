@@ -32,7 +32,7 @@ def Preobrazovatel(a, atype):
 # проверка на соответствие промежутку(0-9)
     else:
         print("Вы ввели не то число")
-
+# преобразование в нужную систему
     if atype == 'bin':
         print(bin(a))
     elif atype == 'oct':
