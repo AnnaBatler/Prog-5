@@ -1,0 +1,62 @@
+'''Для программы, сделанной в рамках лабораторной работы 1 и 2, реализуйте с использованием механизма декораторов
+(предпочтительно) или без него (в этом случае будет необходимо использовать еще один аргумент) функционал для
+сохранения истории вычислений функции в файл.
+При записи в файл предусмотреть вероятность возникновения исключительных ситуаций и создать собственный класс или
+классы для обработки исключительных ситуаций при записи в файл. '''
+
+
+class RangeException(Exception):
+    def __init__(self, text):
+        RangeException.txt = text
+
+logger = []
+
+try:
+    vchislo = int(input('Введите число от 0 до 9 включительно:\n'))
+    if (vchislo < 0) | (vchislo > 9):
+        raise RangeException('Число не подходит')
+except RangeException:
+    print('Число не подходит')
+    vchislo = int(input('Введите число от 0 до 9 включительно:\n'))
+
+vtype = input('Введите тип числа:\n')
+
+def Preobrazovatel(a, atype):
+    if (a == 0):
+        print("Ноль")
+    elif (a == 1):
+        print("Один")
+    elif (a == 2):
+        print("Два")
+    elif (a == 3):
+        print("Три")
+    elif (a == 4):
+        print("Четыре")
+    elif (a == 5):
+        print("Пять")
+    elif (a == 6):
+        print("Шесть")
+    elif (a == 7):
+        print("Семь")
+    elif (a == 8):
+        print("Восемь")
+    elif (a == 9):
+        print("Девять")
+    if atype == 'bin':
+        print(bin(a))
+    elif atype == 'oct':
+        print(oct(a))
+    elif atype == 'hex':
+        print(hex(a))
+
+
+if len(logger) == 1:
+    logger.append("Отсутствие исключений")
+try:
+    with open('text.txt', 'a') as f:
+        f.write(str(logger) + "\n")
+        f.write("Число: " + str(vchislo) + " Система счисления: " + vtype)
+except IOError:  # Возбуждается, когда операция ввода-вывода не проходит.
+    print("Что-то пошло не так")
+
+Preobrazovatel(vchislo, vtype)
